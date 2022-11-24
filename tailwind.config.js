@@ -1,6 +1,6 @@
 module.exports = {
   content: ['./pages/**/*.{js,jsx}', './components/**/*.{js,jsx}'],
-  darkMode: 'class',
+  darkMode: 'false',
   theme: {
     container: {
       center: true,
