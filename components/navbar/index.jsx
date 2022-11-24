@@ -3,7 +3,7 @@ import Link from 'next/link';
 const Navbar = () => {
   return (
     <nav>
-      <div className="container fixed top-0 left-0 mx-auto flex items-center justify-between p-4 backdrop-blur border-b">
+      <div className="container mx-auto flex items-center justify-between p-4 backdrop-blur border-b">
         <div className="flex lg:w-0 lg:flex-1">
           <Link href="/">
             <span className="text-sm font-semibold md:text-xl">edTeach</span>
