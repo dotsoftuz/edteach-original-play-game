@@ -1,7 +1,7 @@
 import React from 'react';
 import Head from 'next/head';
 
-import { Pin } from 'components';
+import { Pin, Username, WaitingRoom } from 'components';
 
 export default function Home() {
   return (
@@ -13,6 +13,8 @@ export default function Home() {
       </Head>
       <div>
         <Pin />
+        <Username />
+        <WaitingRoom />
       </div>
     </div>
   );
