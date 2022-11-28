@@ -12,7 +12,18 @@ module.exports = {
         '2xl': '6rem',
       },
     },
-    extend: {},
+    extend: {
+      animation: {
+        waitingLoader: 'waitingLoader .9s linear infinite',
+      },
+      keyframes: {
+        waitingLoader: {
+          '0%': { opacity: 1 },
+          '45%': { opacity: 0 },
+          '95%': { opacity: 1 },
+        },
+      },
+    },
   },
   plugins: [require('prettier-plugin-tailwindcss')],
 };

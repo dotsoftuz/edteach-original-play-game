@@ -1,9 +1,21 @@
 import React, { useEffect } from 'react';
 import Head from 'next/head';
+
+import { Pin, Username, WaitingRoom } from 'components';
 import { useRouter } from 'next/router';
 import { Pin } from 'components';
 import { useState } from 'react';
-import { addDoc, collection, doc, getDoc, onSnapshot, query, setDoc, updateDoc, where } from 'firebase/firestore';
+import {
+  addDoc,
+  collection,
+  doc,
+  getDoc,
+  onSnapshot,
+  query,
+  setDoc,
+  updateDoc,
+  where,
+} from 'firebase/firestore';
 import { db } from '../firebase';
 import { uuid } from 'uuidv4';
 
@@ -13,13 +25,13 @@ export default function Home() {
   const [playerName, setPlayerName] = useState('');
   const [pinTrue, setPinTrue] = useState(false);
 
-  const router = useRouter()
+  const router = useRouter();
 
   const handleChange = (e) => {
     setPin(e.target.value);
   };
 
-  const id = uuid()
+  const id = uuid();
 
   const handleChangeName = (e) => {
     setPlayerName(e.target.value);
@@ -51,29 +63,29 @@ export default function Home() {
   const joinUser = async () => {
     getQuestion.map(async (item) => {
       if (playerName !== '') {
-        const time= new Date()
+        const time = new Date();
         const questPlayer = doc(db, `question/${item.id}/players`, id);
-        const quest = doc(db, `question`, item.id)
-        const question = await getDoc(quest) 
-        localStorage.setItem("pID", id)
+        const quest = doc(db, `question`, item.id);
+        const question = await getDoc(quest);
+        localStorage.setItem('pID', id);
         await setDoc(questPlayer, {
           playerName,
           time,
           isPlay: true,
-          id: id
-        }).then(async() => {
-          const PlayerIds = question.data().playerId.map((i) => i)
+          id: id,
+        }).then(async () => {
+          const PlayerIds = question.data().playerId.map((i) => i);
           await updateDoc(doc(db, `question`, item.id), {
             playerId: [
               ...PlayerIds,
               {
                 id,
-                playerName
-              }
-            ]
-          })
-        })
-        router.push(`/game/${item.id}`)
+                playerName,
+              },
+            ],
+          });
+        });
+        router.push(`/game/${item.id}`);
       }
     });
   };
@@ -88,6 +100,9 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div>
+        <Pin />
+        <Username />
+        <WaitingRoom />
         {pinTrue ? (
           <div>
             <input
