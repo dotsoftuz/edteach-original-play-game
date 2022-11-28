@@ -1,6 +1,7 @@
-const WaitingRoom = () => {
+const WaitingRoom = ({ text }) => {
   return (
-    <div className="flex h-screen items-center justify-center">
+    <div className="flex flex-col space-y-3 h-screen items-center justify-center">
+      <h1 className="text-3xl">{text}</h1>
       <div className="flex items-end">
         <h1 className="text-3xl font-semibold">
           Boshqalar ham qo&apos;shilshini kuting
