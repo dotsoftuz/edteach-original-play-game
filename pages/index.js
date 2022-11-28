@@ -55,10 +55,12 @@ export default function Home() {
         const questPlayer = doc(db, `question/${item.id}/players`, id);
         const quest = doc(db, `question`, item.id)
         const question = await getDoc(quest) 
+        localStorage.setItem("pID", id)
         await setDoc(questPlayer, {
           playerName,
           time,
-          isPlay: true
+          isPlay: true,
+          id: id
         }).then(async() => {
           const PlayerIds = question.data().playerId.map((i) => i)
           await updateDoc(doc(db, `question`, item.id), {
@@ -71,7 +73,7 @@ export default function Home() {
             ]
           })
         })
-        router.push('/game')
+        router.push(`/game/${item.id}`)
       }
     });
   };
