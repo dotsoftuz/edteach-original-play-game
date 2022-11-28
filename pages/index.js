@@ -88,7 +88,7 @@ export default function Home() {
     });
   };
 
-  console.log(getQuestion);
+  console.log(pinTrue);
 
   return (
     <div>
