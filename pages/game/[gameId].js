@@ -1,11 +1,11 @@
 import { db } from '../../firebase';
 import { collection, onSnapshot, query, where } from 'firebase/firestore';
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 
 import { WaitingRoom } from 'components';
 
-function gameId() {
+function GameId() {
   const [question, setQuestion] = useState([]);
   const [player, setPlayer] = useState([]);
   const router = useRouter();
@@ -32,9 +32,9 @@ function gameId() {
         return (
           <>
             {item.isPlay === false ? (
-              <WaitingRoom text="Siz olib tashlandingiz." />
+              <WaitingRoom removeText="Siz olib tashlandingiz." />
             ) : (
-              <WaitingRoom text="Xush kelibisz o`yinga" />
+              <WaitingRoom joinText="Xush kelibisz o`yinga" />
             )}
           </>
         );
@@ -43,4 +43,4 @@ function gameId() {
   );
 }
 
-export default gameId;
+export default GameId;
