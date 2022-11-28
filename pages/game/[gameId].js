@@ -22,7 +22,6 @@ function gameId() {
       setPlayer(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })))
     );
   }, [gameId]);
-  console.log(player);
 
   return (
     <div>
