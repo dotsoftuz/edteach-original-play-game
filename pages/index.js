@@ -1,7 +1,6 @@
 import { useEffect } from 'react';
 import Head from 'next/head';
 
-import { Pin, Username, WaitingRoom } from 'components';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import {
@@ -16,6 +15,7 @@ import {
 } from 'firebase/firestore';
 import { db } from '../firebase';
 import { uuid } from 'uuidv4';
+import { Username, Pin } from 'components';
 
 export default function Home() {
   const [getQuestion, setGetQuestion] = useState([]);
@@ -63,7 +63,7 @@ export default function Home() {
       if (playerName !== '') {
         const time = new Date();
         const questPlayer = doc(db, `question/${item.id}/players`, id);
-        const quest = doc(db, `question`, item.id);
+        const quest = doc(db, 'question', item.id);
         const question = await getDoc(quest);
         localStorage.setItem('pID', id);
         await setDoc(questPlayer, {
@@ -73,7 +73,7 @@ export default function Home() {
           id: id,
         }).then(async () => {
           const PlayerIds = question.data().playerId.map((i) => i);
-          await updateDoc(doc(db, `question`, item.id), {
+          await updateDoc(doc(db, 'question', item.id), {
             playerId: [
               ...PlayerIds,
               {
@@ -99,39 +99,9 @@ export default function Home() {
       </Head>
       <div className="flex h-[90vh] items-center justify-center">
         {pinTrue ? (
-          <div className="flex w-fit items-center space-x-2 rounded-lg border border-purple-500 border-opacity-90 bg-gray-200 p-2">
-            <input
-              className="w-56 rounded-lg bg-white py-2 px-2 outline-none placeholder:text-lg placeholder:font-medium placeholder:text-gray-700 md:w-96 md:py-4"
-              type="text"
-              onChange={handleChangeName}
-              placeholder="Ismingiz"
-            />
-            <button
-              className="dark:bg-[#1a5cff] w-fit cursor-pointer rounded-lg bg-purple-500 py-3 px-4 text-xs font-medium uppercase text-white
-              shadow-md duration-300 ease-in-out hover:shadow-md active:scale-95 
-              active:bg-opacity-80 md:px-6 md:py-4 md:text-base"
-              onClick={joinUser}
-            >
-              Kirish
-            </button>
-          </div>
+          <Username handleChangeName={handleChangeName} joinUser={joinUser} />
         ) : (
-          <div className="flex w-fit items-center space-x-2 rounded-lg border border-purple-500 border-opacity-90 bg-gray-200 p-2">
-            <input
-              className="w-56 rounded-lg bg-white py-2 px-2 outline-none placeholder:text-lg placeholder:font-medium placeholder:text-gray-700 md:w-96 md:py-4"
-              type="text"
-              onChange={handleChange}
-              placeholder="pin kiriting."
-            />
-            <button
-              onClick={subscribeUser}
-              className="dark:bg-[#1a5cff] w-fit cursor-pointer rounded-lg bg-purple-500 py-3 px-4 text-xs font-medium uppercase text-white
-              shadow-md duration-300 ease-in-out hover:shadow-md active:scale-95 
-              active:bg-opacity-80 md:px-6 md:py-4 md:text-base"
-            >
-              Qo&apos;shilish
-            </button>
-          </div>
+          <Pin handleChange={handleChange} subscribeUser={subscribeUser} />
         )}
       </div>
     </div>

@@ -3,6 +3,8 @@ import { collection, onSnapshot, query, where } from 'firebase/firestore';
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 
+import { WaitingRoom } from 'components';
+
 function gameId() {
   const [question, setQuestion] = useState([]);
   const [player, setPlayer] = useState([]);
@@ -27,7 +29,15 @@ function gameId() {
   return (
     <div>
       {player.map((item) => {
-        return <>{item.isPlay === false ? <h1>Xayr</h1> : <h1>Salom</h1>}</>;
+        return (
+          <>
+            {item.isPlay === false ? (
+              <WaitingRoom text="Siz olib tashlandingiz." />
+            ) : (
+              <WaitingRoom text="Xush kelibisz o`yinga" />
+            )}
+          </>
+        );
       })}
     </div>
   );
