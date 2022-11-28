@@ -3,7 +3,6 @@ import Head from 'next/head';
 
 import { Pin, Username, WaitingRoom } from 'components';
 import { useRouter } from 'next/router';
-import { Pin } from 'components';
 import { useState } from 'react';
 import {
   addDoc,
@@ -90,7 +89,7 @@ export default function Home() {
     });
   };
 
-  console.log(getQuestion);
+  console.log(pinTrue);
 
   return (
     <div>
@@ -100,9 +99,9 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div>
-        <Pin />
-        <Username />
-        <WaitingRoom />
+        {/* <Pin />
+        <Username /> */}
+        {/* <WaitingRoom /> */}
         {pinTrue ? (
           <div>
             <input
