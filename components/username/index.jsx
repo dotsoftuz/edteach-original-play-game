@@ -8,9 +8,9 @@ const Username = () => {
           placeholder="Usernameni kiriting."
         />
         <a
-          className="w-fit cursor-pointer rounded-lg bg-purple-500 py-3 px-4 text-xs font-medium uppercase text-white shadow-md
-          duration-300 ease-in-out hover:shadow-md active:scale-95 active:bg-opacity-80 
-          dark:bg-[#1a5cff] md:px-6 md:py-4 md:text-base"
+          className="w-fit cursor-pointer rounded-lg bg-purple-500 py-3 px-4 text-xs font-medium uppercase text-white
+          shadow-md duration-300 ease-in-out hover:shadow-md active:scale-95 
+          active:bg-opacity-80 md:px-6 md:py-4 md:text-base"
         >
           Qo&apos;shilish
         </a>
