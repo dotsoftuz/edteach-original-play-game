@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 
 import { WaitingRoom } from 'components';
+import GameRoom from '@components/game/GameRoom';
 
 function GameId() {
   const [question, setQuestion] = useState([]);
@@ -33,7 +34,7 @@ function GameId() {
             {item.isPlay === false ? (
               <WaitingRoom removeText="Siz olib tashlandingiz." />
             ) : (
-              <WaitingRoom joinText="Xush kelibisz o`yinga" />
+              <GameRoom /> 
             )}
           </>
         );
