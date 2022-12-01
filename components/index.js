@@ -7,3 +7,4 @@ export { default as Username } from './username/index';
 
 // Game
 export { default as WaitingRoom } from './game/WaitingRoom';
+export { default as StartGame } from './startgame/index.jsx';
