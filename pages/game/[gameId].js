@@ -3,8 +3,7 @@ import { collection, onSnapshot, query, where } from 'firebase/firestore';
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 
-import { WaitingRoom } from 'components';
-import GameRoom from '@components/game/GameRoom';
+import { StartGame, WaitingRoom } from 'components';
 
 function GameId() {
   const [question, setQuestion] = useState([]);
@@ -25,7 +24,8 @@ function GameId() {
       setPlayer(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })))
     );
   }, [gameId]);
-
+ 
+ 
   return (
     <div>
       {player.map((item) => {
@@ -34,7 +34,16 @@ function GameId() {
             {item.isPlay === false ? (
               <WaitingRoom removeText="Siz olib tashlandingiz." />
             ) : (
-              <GameRoom /> 
+              <>
+                {question.map((item) =>
+                
+                  item.status === 'showingQuestion' ? (
+                    <StartGame question={question} player={player}/>
+                  ) : (
+                    <WaitingRoom joinText="Xush kelibisz o`yinga" />
+                  )
+                )}
+              </>
             )}
           </>
         );
