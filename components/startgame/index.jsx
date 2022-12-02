@@ -6,7 +6,7 @@ import square from '../../public/images/square.svg';
 import circle from '../../public/images/circle.svg';
 import diamond from '../../public/images/diamond.svg';
 
-function StartGame({ question, player }) {
+function StartGame({ question, player, count }) {
     // const answerlist = question.map((item) => item.questionList.map((item2) => item2.answerList.map((item3) => item3)))
     // console.log(answerlist);
 
@@ -16,25 +16,22 @@ function StartGame({ question, player }) {
 
     const [correct, setCorrect] = useState("")
 
+    const hello = question.map((item) => { item.questionList[item.questionIndex].answerList.map((item2) => item2.isCorrect) });
 
 
-
+ 
     const getCorrectAnswer = (index, i) => {
 
-        console.log(i);
         question.map((item) => {
             const hello = item.questionList[index].answerList.map((item2) => item2.isCorrect);
 
-            console.log(hello[i] === true ? setCorrect("togri") : setCorrect("xato"));
+            hello[i] === true ? setCorrect("togri") : setCorrect("xato")
 
 
 
         })
 
-        // question.answerList.map((item, key) => {
-        //     item.isCorrect[key] === item.isCorrect[i] ? console.log("To'g'ri javob") : console.log("Xato javob");
-        // });
-
+        
 
     }
 
