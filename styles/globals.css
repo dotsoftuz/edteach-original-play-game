@@ -4,6 +4,6 @@
 
 @layer components {
   .create-blok {
-    @apply flex w-[47rem] cursor-pointer items-center justify-center  gap-5 rounded-lg p-3 pl-5 shadow-[0__1px_3px_#80858b] min-h-[17rem]  sm:p-[10px];
+    @apply flex w-[47rem] cursor-pointer items-center justify-center  gap-5 rounded-lg p-3 pl-5 shadow-[0__1px_3px_#80858b] min-h-[19rem]  sm:p-[10px];
   }
 }
