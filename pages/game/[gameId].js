@@ -13,6 +13,13 @@ function GameId() {
   const router = useRouter();
   const { gameId } = router.query;
 
+  let counter = [];
+  console.log(counter);
+
+  for (let i = 1; i <= count; i++) {
+    counter.push(i);
+  }
+
   useEffect(() => {
     const PlayerId = localStorage.getItem('pID');
     const coll = collection(db, 'question');
@@ -51,19 +58,19 @@ function GameId() {
                 {question.map((item) =>
                   item.status === 'showingQuestion' ? (
                     count === 0 ? (
-                      
-                        <StartGame question={question} player={player} />
-                    
+                      <StartGame question={question} player={player} />
                     ) : (
-                      <h2
-                        className={
-                          count === 0
-                            ? 'hidden'
-                            : 'text-center text-4xl font-bold'
-                        }
-                      >
-                        {count}
-                      </h2>
+                      <div className="flex h-screen items-center justify-center">
+                        <h2
+                          className={
+                            count === 0
+                              ? 'hidden'
+                              : 'text-center text-4xl font-bold'
+                          }
+                        >
+                          {count}
+                        </h2>
+                      </div>
                     )
                   ) : (
                     <WaitingRoom joinText="Xush kelibisz o`yinga" />
@@ -74,6 +81,7 @@ function GameId() {
           </>
         );
       })}
+
     </div>
   );
 }
