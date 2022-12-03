@@ -6,20 +6,17 @@ import square from '../../public/images/square.svg';
 import circle from '../../public/images/circle.svg';
 import diamond from '../../public/images/diamond.svg';
 
-function StartGame({ question, player, count }) {
-    // const answerlist = question.map((item) => item.questionList.map((item2) => item2.answerList.map((item3) => item3)))
-    // console.log(answerlist);
-
-    // console.log(question.map((game) => (game.questionIndex)));
-    // console.log(question.map((game) => (game.questionList)));
+function StartGame({ question, player }) {
 
 
     const [correct, setCorrect] = useState("")
 
-    const hello = question.map((item) => { item.questionList[item.questionIndex].answerList.map((item2) => item2.isCorrect) });
+    // const hello = question.map((item) => { item.questionList[item.questionIndex].answerList.map((item2) => item2.isCorrect) });
 
 
- 
+    
+
+
     const getCorrectAnswer = (index, i) => {
 
         question.map((item) => {
@@ -31,7 +28,6 @@ function StartGame({ question, player, count }) {
 
         })
 
-        
 
     }
 
