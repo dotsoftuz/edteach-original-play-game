@@ -14,7 +14,7 @@ const Pin = ({ handleChange, subscribeUser }) => {
               shadow-md duration-300 ease-in-out hover:shadow-md active:scale-95 
               active:bg-opacity-80 md:px-6 md:py-4 md:text-base"
         >
-          Qo&apos;shilish
+          Qo&apos;shilishsh
         </button>
       </div>
     </div>
