@@ -9,7 +9,12 @@ function GameId() {
   const [question, setQuestion] = useState([]);
   const [player, setPlayer] = useState([]);
   const [count, setCount] = useState(10);
-  const [podium, setPodium] = useState(false);
+  const [questionCount, setQuestionCount] = useState(3);
+  const [questionTime, setQuestionTime] = useState(false);
+  const [showCount, setShowCount] = useState(false);
+  // const [time, setTime] = useState();
+  // const [block, setBlock] = useState(false);
+  // const [singleData, setSingleData] = useState({});
   const router = useRouter();
   const { gameId } = router.query;
 
@@ -19,6 +24,14 @@ function GameId() {
   for (let i = 1; i <= count; i++) {
     counter.push(i);
   }
+
+  useEffect(() => {
+    question.map((item) =>
+      item.status === 'showingQuestion'
+        ? setShowCount(true)
+        : setShowCount(false)
+    );
+  }, [question]);
 
   useEffect(() => {
     const PlayerId = localStorage.getItem('pID');
@@ -34,17 +47,76 @@ function GameId() {
     );
   }, [gameId]);
 
+  // Animation 3s
   useEffect(() => {
-    if (question.map((item) => item.status === 'showingQuestion')) {
+    if (questionTime) {
+      const interval2 = setInterval(() => {
+        if (questionCount) {
+          setQuestionCount(questionCount - 1);
+        }
+        if (questionCount === 0) {
+          setQuestionTime(false);
+        }
+      }, 1000);
+
+      return () => clearInterval(interval2);
+    }
+  }, [questionTime, questionCount]);
+
+  // Counter 10s
+  useEffect(() => {
+    if (showCount) {
       const interval = setInterval(() => {
         if (count) {
           setCount(count - 1);
+        }
+        if (count === 0) {
+          setShowCount(false);
+          setQuestionTime(true);
         }
       }, 1000);
 
       return () => clearInterval(interval);
     }
-  }, [count]);
+  }, [showCount, count]);
+
+  //question timer 30s
+
+  // useEffect(() => {
+  //   if (questionCount === 0) {
+  //     const interval1 = setInterval(() => {
+  //       if (time) {
+  //         setTime(time - 1);
+  //       }
+  //       if (time === 0) {
+  //         setBlock(true)
+  //       }
+  //     }, 1000);
+
+  //     return () => clearInterval(interval1);
+  //   }
+  // }, [questionCount, time]);
+
+  useEffect(() => {
+    if (question.map((item) => item.next == true)) {
+      setQuestionCount(3);
+    }
+    if (question.map((item) => item.timeLeft == true)) {
+      setQuestionCount(3);
+    }
+  }, [question]);
+
+  useEffect(() => {
+    window.addEventListener('beforeunload', alertUser);
+    return () => {
+      window.removeEventListener('beforeunload', alertUser);
+    };
+  }, []);
+
+  const alertUser = (e) => {
+    e.preventDefault();
+    e.returnValue = '';
+  };
 
   return (
     <div>
@@ -58,7 +130,29 @@ function GameId() {
                 {question.map((item) =>
                   item.status === 'showingQuestion' ? (
                     count === 0 ? (
+<<<<<<< HEAD
                       <StartGame question={question} player={player} />
+=======
+                      <>
+                        {questionCount === 0 && (
+                          <StartGame
+                            question={question}
+                            player={player}
+                            // block={block}
+                          />
+                        )}
+
+                        <h2
+                          className={
+                            questionCount === 0
+                              ? 'hidden'
+                              : 'text-center text-4xl font-bold'
+                          }
+                        >
+                          {questionCount}
+                        </h2>
+                      </>
+>>>>>>> d1ce033dc03b1d1df384caab1bb31bf1bee35c5a
                     ) : (
                       <div className="flex h-screen items-center justify-center">
                         <h2
