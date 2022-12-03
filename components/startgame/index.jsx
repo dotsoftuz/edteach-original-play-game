@@ -8,7 +8,7 @@ import diamond from '../../public/images/diamond.svg';
 import { doc, getDoc, updateDoc } from 'firebase/firestore';
 import { db } from '../../firebase';
 
-function StartGame({ question, player, gameId }) {
+function StartGame({ question, player }) {
   const [correct, setCorrect] = useState(false);
   const [index, setIndex] = useState(0);
   const getCorrectAnswer = (index, i) => {
