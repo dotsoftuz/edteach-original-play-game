@@ -139,8 +139,8 @@ function GameId() {
                               </div>
                             </div>
                           </div>
-                          <div class="mx-auto mt-5 w-full rounded bg-gray-200 md:mt-10 md:w-1/2 ">
-                            <div class="shim-red h-4 w-full rounded"></div>
+                          <div className="mx-auto mt-5 w-full rounded bg-gray-200 md:mt-10 md:w-1/2 ">
+                            <div className="shim-red h-4 w-full rounded"></div>
                           </div>
                         </div>
                       </>
