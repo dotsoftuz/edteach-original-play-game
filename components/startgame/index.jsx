@@ -6,29 +6,56 @@ import square from '../../public/images/square.svg';
 import circle from '../../public/images/circle.svg';
 import diamond from '../../public/images/diamond.svg';
 
-function StartGame({ question, player }) {
+function StartGame({ question, player, count }) {
     // const answerlist = question.map((item) => item.questionList.map((item2) => item2.answerList.map((item3) => item3)))
     // console.log(answerlist);
 
-console.log(player);
+    // console.log(question.map((game) => (game.questionIndex)));
+    // console.log(question.map((game) => (game.questionList)));
 
-  return (
-    <>
-      {question.map((game) => (
+
+    const [correct, setCorrect] = useState("")
+
+    const hello = question.map((item) => { item.questionList[item.questionIndex].answerList.map((item2) => item2.isCorrect) });
+
+
+ 
+    const getCorrectAnswer = (index, i) => {
+
+        question.map((item) => {
+            const hello = item.questionList[index].answerList.map((item2) => item2.isCorrect);
+
+            hello[i] === true ? setCorrect("togri") : setCorrect("xato")
+
+
+
+        })
+
+        
+
+    }
+
+
+    return (
         <>
-          <nav>
-            <div className="container mx-auto flex items-center justify-between border-b p-4 backdrop-blur">
-              <div className="flex lg:w-0 lg:flex-1">
-                <span className="text-sm font-bold md:text-xl">
-                  {' '}
-                  {game.questionIndex + 1} of {game.questionList.length}
-                </span>
-              </div>
-            </div>
-          </nav>
 
 
 
+            {question.map((game) => (
+                <>
+
+                    <nav>
+                        <div className="container mx-auto flex items-center justify-between p-4 backdrop-blur border-b">
+                            <div className="flex lg:w-0 lg:flex-1">
+
+                                <span className="text-sm font-bold md:text-xl">  {game.questionIndex + 1} of{' '}
+                                    {game.questionList.length}</span>
+
+                            </div>
+
+
+                        </div>
+                    </nav>
 
                  
 

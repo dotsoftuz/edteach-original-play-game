@@ -9,9 +9,19 @@ function GameId() {
   const [question, setQuestion] = useState([]);
   const [player, setPlayer] = useState([]);
   const [count, setCount] = useState(10);
-  const [podium, setPodium] = useState(false);
+  const [questionCount, setQuestionCount] = useState(3);
+  const [questionTime, setQuestionTime] = useState(false);
+  const [showCount, setShowCount] = useState(false);
   const router = useRouter();
   const { gameId } = router.query;
+
+  useEffect(() => {
+    question.map((item) =>
+      item.status === 'showingQuestion'
+        ? setShowCount(true)
+        : setShowCount(false)
+    );
+  }, [question]);
 
   useEffect(() => {
     const PlayerId = localStorage.getItem('pID');
@@ -27,18 +37,62 @@ function GameId() {
     );
   }, [gameId]);
 
+
+
+  // Animation 3s
   useEffect(() => {
-    if (question.map((item) => item.status === 'showingQuestion')) {
+    if (questionTime) {
+      const interval2 = setInterval(() => {
+        if (questionCount) {
+          setQuestionCount(questionCount - 1);
+        }
+        if (questionCount === 0) {
+          setQuestionTime(false);
+        }
+      }, 1000);
+
+      return () => clearInterval(interval2);
+    }
+  }, [questionTime, questionCount]);
+
+  // Counter 10s
+  useEffect(() => {
+    if (showCount) {
       const interval = setInterval(() => {
         if (count) {
           setCount(count - 1);
+        }
+        if (count === 0) {
+          setShowCount(false);
+          setQuestionTime(true);
         }
       }, 1000);
 
       return () => clearInterval(interval);
     }
-  }, [count]);
+  }, [showCount, count]);
 
+
+  useEffect(() => {
+    if (question.map((item) => item.next == true)) {
+      setQuestionCount(3);
+    }
+  }, [question]);
+
+
+  useEffect(() => {
+    window.addEventListener('beforeunload', alertUser);
+    return () => {
+      window.removeEventListener('beforeunload', alertUser);
+    };
+  }, []);
+
+  const alertUser = (e) => {
+    e.preventDefault();
+    e.returnValue = '';
+  };
+
+ 
   return (
     <div>
       {player.map((item) => {
@@ -51,8 +105,27 @@ function GameId() {
                 {question.map((item) =>
                   item.status === 'showingQuestion' ? (
                     count === 0 ? (
-                      <StartGame question={question} player={player} />
-                    ) : (
+                      <>
+                     { questionCount === 0 && (
+                        <StartGame
+                          question={question}
+                          player={player}
+                          count={count}
+                        />
+                      )}
+                      
+                      <h2
+                        className={
+                          questionCount === 0
+                          ? 'hidden'
+                          : 'text-center text-4xl font-bold'
+                        }
+                        >
+                        {questionCount}
+                      </h2>
+                      
+                        </>
+                    ) :(
                       <h2
                         className={
                           count === 0
