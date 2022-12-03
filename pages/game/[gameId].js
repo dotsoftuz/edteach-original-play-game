@@ -12,6 +12,9 @@ function GameId() {
   const [questionCount, setQuestionCount] = useState(3);
   const [questionTime, setQuestionTime] = useState(false);
   const [showCount, setShowCount] = useState(false);
+  // const [time, setTime] = useState();
+  // const [block, setBlock] = useState(false);
+  // const [singleData, setSingleData] = useState({});
   const router = useRouter();
   const { gameId } = router.query;
 
@@ -36,8 +39,6 @@ function GameId() {
       setPlayer(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })))
     );
   }, [gameId]);
-
-
 
   // Animation 3s
   useEffect(() => {
@@ -72,13 +73,31 @@ function GameId() {
     }
   }, [showCount, count]);
 
+  //question timer 30s
+
+  // useEffect(() => {
+  //   if (questionCount === 0) {
+  //     const interval1 = setInterval(() => {
+  //       if (time) {
+  //         setTime(time - 1);
+  //       }
+  //       if (time === 0) {
+  //         setBlock(true)
+  //       }
+  //     }, 1000);
+
+  //     return () => clearInterval(interval1);
+  //   }
+  // }, [questionCount, time]);
 
   useEffect(() => {
     if (question.map((item) => item.next == true)) {
       setQuestionCount(3);
     }
+    if (question.map((item) => item.timeLeft == true)) {
+      setQuestionCount(3);
+    }
   }, [question]);
-
 
   useEffect(() => {
     window.addEventListener('beforeunload', alertUser);
@@ -92,7 +111,6 @@ function GameId() {
     e.returnValue = '';
   };
 
- 
   return (
     <div>
       {player.map((item) => {
@@ -106,26 +124,25 @@ function GameId() {
                   item.status === 'showingQuestion' ? (
                     count === 0 ? (
                       <>
-                     { questionCount === 0 && (
-                        <StartGame
-                          question={question}
-                          player={player}
-                          count={count}
-                        />
-                      )}
-                      
-                      <h2
-                        className={
-                          questionCount === 0
-                          ? 'hidden'
-                          : 'text-center text-4xl font-bold'
-                        }
+                        {questionCount === 0 && (
+                          <StartGame
+                            question={question}
+                            player={player}
+                            // block={block}
+                          />
+                        )}
+
+                        <h2
+                          className={
+                            questionCount === 0
+                              ? 'hidden'
+                              : 'text-center text-4xl font-bold'
+                          }
                         >
-                        {questionCount}
-                      </h2>
-                      
-                        </>
-                    ) :(
+                          {questionCount}
+                        </h2>
+                      </>
+                    ) : (
                       <h2
                         className={
                           count === 0
