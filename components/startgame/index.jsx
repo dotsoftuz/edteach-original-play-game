@@ -7,39 +7,17 @@ import circle from '../../public/images/circle.svg';
 import diamond from '../../public/images/diamond.svg';
 
 function StartGame({ question, player }) {
-
-
     const [correct, setCorrect] = useState("")
-
-    // const hello = question.map((item) => { item.questionList[item.questionIndex].answerList.map((item2) => item2.isCorrect) });
-
-
-    
-
-
     const getCorrectAnswer = (index, i) => {
-
         question.map((item) => {
             const hello = item.questionList[index].answerList.map((item2) => item2.isCorrect);
-
             hello[i] === true ? setCorrect("togri") : setCorrect("xato")
-
-
-
         })
-
-
     }
-
-
     return (
         <>
-
-
-
             {question.map((game) => (
                 <>
-
                     <nav>
                         <div className="container mx-auto flex items-center justify-between p-4 backdrop-blur border-b">
                             <div className="flex lg:w-0 lg:flex-1">
@@ -52,9 +30,6 @@ function StartGame({ question, player }) {
 
                         </div>
                     </nav>
-
-
-
                     {correct === "" ? <div className="grid gap-2 md:grid-cols-2  ml-2 mt-2  ">
                         {game.questionList[
                             game.questionIndex
@@ -98,24 +73,15 @@ function StartGame({ question, player }) {
                                 </div>
 
                                 {/* check dev */}
-
-
                             </div>
                         ))}
                     </div>
                         : correct === "togri" ? <h2>👍</h2> : <h2>X</h2>
                     }
 
-
-
-
-
-
                     <footer className='w-full mt-2 h-10 border-t flex items-center pl-10 text-lg font-bold'>
                         {player.map((item) => item.playerName)}
                     </footer>
-
-
                 </>
             ))}
         </>
