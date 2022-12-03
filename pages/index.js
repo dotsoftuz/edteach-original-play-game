@@ -71,6 +71,7 @@ export default function Home() {
           time,
           isPlay: true,
           id: id,
+          point: 0
         }).then(async () => {
           const PlayerIds = question.data().playerId.map((i) => i);
           await updateDoc(doc(db, 'question', item.id), {

@@ -113,10 +113,11 @@ function GameId() {
 
   return (
     <div>
-      {player.map((item) => {
+      {player.map((item0) => {
+        console.log(item0);
         return (
           <>
-            {item.isPlay === false ? (
+            {item0.isPlay === false ? (
               <WaitingRoom removeText="Siz olib tashlandingiz." />
             ) : (
               <>
@@ -128,7 +129,7 @@ function GameId() {
                           <StartGame
                             question={question}
                             player={player}
-                            // block={block}
+                            gameId={gameId}
                           />
                         )}
 
@@ -139,6 +140,7 @@ function GameId() {
                               : 'text-center text-4xl font-bold'
                           }
                         >
+                          {item.questionList[item.questionIndex].question}
                           {questionCount}
                         </h2>
                       </>
@@ -153,6 +155,12 @@ function GameId() {
                         {count}
                       </h2>
                     )
+                  ) : item.status === 'result' ? (
+                    <>
+                      
+                      <h2>{item0.playerName}</h2>
+                      <p>{item0.point}</p>
+                    </>
                   ) : (
                     <WaitingRoom joinText="Xush kelibisz o`yinga" />
                   )

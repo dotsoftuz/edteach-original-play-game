@@ -5,19 +5,32 @@ import triangle from '../../public/images/triangle.svg';
 import square from '../../public/images/square.svg';
 import circle from '../../public/images/circle.svg';
 import diamond from '../../public/images/diamond.svg';
+import { doc, getDoc, updateDoc } from 'firebase/firestore';
+import { db } from '../../firebase';
 
-function StartGame({ question, player }) {
-  const [correct, setCorrect] = useState('');
-
-  // const hello = question.map((item) => { item.questionList[item.questionIndex].answerList.map((item2) => item2.isCorrect) });
-
+function StartGame({ question, player, gameId }) {
+  const [correct, setCorrect] = useState(false);
+  const [index, setIndex] = useState(0);
   const getCorrectAnswer = (index, i) => {
+    setCorrect(true);
+    setIndex(i);
     question.map((item) => {
       const hello = item.questionList[index].answerList.map(
         (item2) => item2.isCorrect
       );
 
-      hello[i] === true ? setCorrect('togri') : setCorrect('xato');
+      let result = hello[i] === true ? 10 : 0;
+
+      const updatePlayer = async () => {
+        const PlayerId = localStorage.getItem('pID');
+        const questPlayer = doc(db, `question/${item.id}/players`, PlayerId);
+        const Player = await getDoc(questPlayer);
+        const point = Player.data().point;
+        await updateDoc(questPlayer, {
+          point: point + result,
+        });
+      };
+      updatePlayer();
     });
   };
 
@@ -36,36 +49,93 @@ function StartGame({ question, player }) {
             </div>
           </nav>
 
-          <div className="ml-2 grid gap-2  md:grid-cols-2   ">
-            {game.questionList[game.questionIndex].answerList.map((item) => (
+          {correct === false ? (
+            <div className="ml-2 mt-2 grid  gap-2 md:grid-cols-2  ">
+              {game.questionList[game.questionIndex].answerList.map(
+                (item, index) => (
+                  <div
+                    key={item.id}
+                    onClick={() => getCorrectAnswer(game.questionIndex, index)}
+                    className={
+                      item.bgColor === 'red'
+                        ? ` create-blok   bg-[#e21b3c]`
+                        : item.bgColor === 'blue'
+                        ? `create-blok  bg-[#1368ce]`
+                        : item.bgColor === 'yellow'
+                        ? `create-blok bg-[#d89e00]`
+                        : item.bgColor === 'gren'
+                        ? `create-blok bg-[#26890c]`
+                        : ''
+                    }
+                  >
+                    <div
+                      className={`${
+                        item.svgIcon === 'diamond' ? 'rotate-45' : ''
+                      } !min-w-[30px] leading-[100%]`}
+                    >
+                      <Image
+                        src={
+                          item.svgIcon === 'triangle'
+                            ? `${triangle.src}`
+                            : item.svgIcon === 'square'
+                            ? `${square.src}`
+                            : item.svgIcon === 'circle'
+                            ? `${circle.src}`
+                            : item.svgIcon === 'diamond'
+                            ? `${diamond.src}`
+                            : ''
+                        }
+                        width="60px"
+                        height="60px"
+                      />
+                    </div>
+                  </div>
+                )
+              )}
+            </div>
+          ) : (
+            <>
               <div
-                key={item.id}
                 className={
-                  item.bgColor === 'red'
+                  game.questionList[game.questionIndex].answerList[index]
+                    .bgColor === 'red'
                     ? ` create-blok   bg-[#e21b3c]`
-                    : item.bgColor === 'blue'
+                    : game.questionList[game.questionIndex].answerList[index]
+                        .bgColor === 'blue'
                     ? `create-blok  bg-[#1368ce]`
-                    : item.bgColor === 'yellow'
+                    : game.questionList[game.questionIndex].answerList[index]
+                        .bgColor === 'yellow'
                     ? `create-blok bg-[#d89e00]`
-                    : item.bgColor === 'gren'
+                    : game.questionList[game.questionIndex].answerList[index]
+                        .bgColor === 'gren'
                     ? `create-blok bg-[#26890c]`
                     : ''
                 }
               >
                 <div
                   className={`${
-                    item.svgIcon === 'diamond' ? 'rotate-45' : ''
+                    game.questionList[game.questionIndex].answerList[index]
+                      .svgIcon === 'diamond'
+                      ? 'rotate-45'
+                      : ''
                   } !min-w-[30px] leading-[100%]`}
                 >
                   <Image
                     src={
-                      item.svgIcon === 'triangle'
+                      game.questionList[game.questionIndex].answerList[index]
+                        .svgIcon === 'triangle'
                         ? `${triangle.src}`
-                        : item.svgIcon === 'square'
+                        : game.questionList[game.questionIndex].answerList[
+                            index
+                          ].svgIcon === 'square'
                         ? `${square.src}`
-                        : item.svgIcon === 'circle'
+                        : game.questionList[game.questionIndex].answerList[
+                            index
+                          ].svgIcon === 'circle'
                         ? `${circle.src}`
-                        : item.svgIcon === 'diamond'
+                        : game.questionList[game.questionIndex].answerList[
+                            index
+                          ].svgIcon === 'diamond'
                         ? `${diamond.src}`
                         : ''
                     }
@@ -76,10 +146,10 @@ function StartGame({ question, player }) {
 
                 {/* check dev */}
               </div>
-            ))}
-          </div>
+            </>
+          )}
 
-          <footer className="mt-24  flex h-14 w-full items-center border-t pl-10 text-lg font-bold">
+          <footer className="mt-2 flex h-10 w-full items-center border-t pl-10 text-lg font-bold">
             {player.map((item) => item.playerName)}
           </footer>
         </>
