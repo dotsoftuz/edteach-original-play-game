@@ -9,12 +9,9 @@ function GameId() {
   const [question, setQuestion] = useState([]);
   const [player, setPlayer] = useState([]);
   const [count, setCount] = useState(10);
-  const [questionCount, setQuestionCount] = useState(3);
+  const [questionCount, setQuestionCount] = useState(5);
   const [questionTime, setQuestionTime] = useState(false);
   const [showCount, setShowCount] = useState(false);
-  // const [time, setTime] = useState();
-  // const [block, setBlock] = useState(false);
-  // const [singleData, setSingleData] = useState({});
   const router = useRouter();
   const { gameId } = router.query;
 
@@ -73,23 +70,6 @@ function GameId() {
     }
   }, [showCount, count]);
 
-  //question timer 30s
-
-  // useEffect(() => {
-  //   if (questionCount === 0) {
-  //     const interval1 = setInterval(() => {
-  //       if (time) {
-  //         setTime(time - 1);
-  //       }
-  //       if (time === 0) {
-  //         setBlock(true)
-  //       }
-  //     }, 1000);
-
-  //     return () => clearInterval(interval1);
-  //   }
-  // }, [questionCount, time]);
-
   useEffect(() => {
     if (question.map((item) => item.next == true)) {
       setQuestionCount(3);
@@ -114,13 +94,12 @@ function GameId() {
   return (
     <div>
       {player.map((item0) => {
-        console.log(item0);
         return (
           <>
             {item0.isPlay === false ? (
-              <WaitingRoom removeText="Siz olib tashlandingiz." />
+              <WaitingRoom removeText="Siz chiqarib tashlandingiz" />
             ) : (
-              <>
+              <div>
                 {question.map((item) =>
                   item.status === 'showingQuestion' ? (
                     count === 0 ? (
@@ -132,40 +111,62 @@ function GameId() {
                             gameId={gameId}
                           />
                         )}
-
-                        <h2
+                        <div
                           className={
                             questionCount === 0
                               ? 'hidden'
-                              : 'text-center text-4xl font-bold'
+                              : 'flex h-screen flex-col items-center justify-center'
                           }
                         >
-                          {item.questionList[item.questionIndex].question}
-                          {questionCount}
-                        </h2>
+                          <div className="flex items-center">
+                            <div className="mr-5 flex h-16 w-16 items-center justify-center rounded-full bg-blue-500 text-white  md:h-20 md:w-20">
+                              <p className="visible text-3xl font-semibold text-white md:text-4xl md:font-bold">
+                                {questionCount}
+                              </p>
+                            </div>
+                            <div
+                              className={
+                                questionCount === 0
+                                  ? 'hidden'
+                                  : 'visible flex items-center space-x-1 text-5xl font-semibold lg:text-7xl'
+                              }
+                            >
+                              {item.questionList[item.questionIndex].question}
+                              <div className="ml-5 flex h-16 w-16 items-center justify-center rounded-full bg-blue-500 text-white  md:h-20 md:w-20">
+                                <p className="visible text-3xl font-semibold text-white md:text-4xl md:font-bold">
+                                  {questionCount}
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="mx-auto mt-5 w-full rounded bg-gray-200 md:mt-10 md:w-1/2 ">
+                            <div class="shim-red h-4 w-full rounded"></div>
+                          </div>
+                        </div>
                       </>
                     ) : (
-                      <h2
-                        className={
-                          count === 0
-                            ? 'hidden'
-                            : 'text-center text-4xl font-bold'
-                        }
-                      >
-                        {count}
-                      </h2>
+                      <div className="flex h-screen items-center justify-center">
+                        <h2
+                          className={
+                            count === 0
+                              ? 'hidden'
+                              : 'visible text-5xl lg:text-7xl'
+                          }
+                        >
+                          {count}
+                        </h2>
+                      </div>
                     )
                   ) : item.status === 'result' ? (
                     <>
-                      
                       <h2>{item0.playerName}</h2>
                       <p>{item0.point}</p>
                     </>
                   ) : (
-                    <WaitingRoom joinText="Xush kelibisz o`yinga" />
+                    <WaitingRoom joinText="Xush kelibsiz o'yinga" />
                   )
                 )}
-              </>
+              </div>
             )}
           </>
         );

@@ -38,19 +38,15 @@ function StartGame({ question, player, gameId }) {
     <>
       {question.map((game) => (
         <>
-          <nav>
-            <div className="container mx-auto flex items-center justify-between border-b p-4 backdrop-blur">
-              <div className="flex lg:w-0 lg:flex-1">
-                <span className="text-sm font-bold md:text-xl">
-                  {' '}
-                  {game.questionIndex + 1} of {game.questionList.length}
-                </span>
-              </div>
+          <nav className="flex items-center justify-between p-2 md:p-3">
+            <div className="text-lg font-bold md:text-3xl">
+              {game.questionIndex + 1}/{game.questionList.length}
             </div>
+            <div className='text-lg font-bold md:text-3xl'>{player.map((item) => item.playerName)}</div>
           </nav>
 
           {correct === false ? (
-            <div className="ml-2 mt-2 grid  gap-2 md:grid-cols-2  ">
+            <div className="p-2   grid grid-cols-2 grid-rows-2 gap-2">
               {game.questionList[game.questionIndex].answerList.map(
                 (item, index) => (
                   <div
@@ -58,9 +54,9 @@ function StartGame({ question, player, gameId }) {
                     onClick={() => getCorrectAnswer(game.questionIndex, index)}
                     className={
                       item.bgColor === 'red'
-                        ? ` create-blok   bg-[#e21b3c]`
+                        ? ` create-blok bg-[#e21b3c]`
                         : item.bgColor === 'blue'
-                        ? `create-blok  bg-[#1368ce]`
+                        ? `create-blok bg-[#1368ce]`
                         : item.bgColor === 'yellow'
                         ? `create-blok bg-[#d89e00]`
                         : item.bgColor === 'gren'
@@ -94,21 +90,21 @@ function StartGame({ question, player, gameId }) {
               )}
             </div>
           ) : (
-            <>
+            <div className='flex md:items-center md:justify-center h-[90vh] p-2 md:-p-0'>
               <div
                 className={
                   game.questionList[game.questionIndex].answerList[index]
                     .bgColor === 'red'
-                    ? ` create-blok   bg-[#e21b3c]`
+                    ? ` create-blok h-[93vh] md:h-1/2 w-full md:w-[50vw] bg-[#e21b3c]`
                     : game.questionList[game.questionIndex].answerList[index]
                         .bgColor === 'blue'
-                    ? `create-blok  bg-[#1368ce]`
+                    ? `create-blok h-[93vh] md:h-1/2 w-full md:w-[50vw] bg-[#1368ce]`
                     : game.questionList[game.questionIndex].answerList[index]
                         .bgColor === 'yellow'
-                    ? `create-blok bg-[#d89e00]`
+                    ? `create-blok h-[93vh] md:h-1/2 w-full md:w-[50vw] bg-[#d89e00]`
                     : game.questionList[game.questionIndex].answerList[index]
                         .bgColor === 'gren'
-                    ? `create-blok bg-[#26890c]`
+                    ? `create-blok h-[93vh] md:h-1/2 w-full md:w-[50vw] bg-[#26890c]`
                     : ''
                 }
               >
@@ -146,12 +142,8 @@ function StartGame({ question, player, gameId }) {
 
                 {/* check dev */}
               </div>
-            </>
+            </div>
           )}
-
-          <footer className="mt-2 flex h-10 w-full items-center border-t pl-10 text-lg font-bold">
-            {player.map((item) => item.playerName)}
-          </footer>
         </>
       ))}
     </>
@@ -159,4 +151,3 @@ function StartGame({ question, player, gameId }) {
 }
 
 export default StartGame;
-
