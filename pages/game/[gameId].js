@@ -197,7 +197,7 @@ function GameId() {
                       </div>
                     </div>
                   ) : (
-                    <WaitingRoom joinText="Xush kelibsiz o'yinga" />
+                    <WaitingRoom joinText="O'yinga xush kelibsiz " />
                   )
                 )}
               </div>
