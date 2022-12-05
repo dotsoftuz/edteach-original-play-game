@@ -93,7 +93,7 @@ function GameId() {
 
   return (
     <div>
-      {player.map((item0) => {
+      {player.map((item0, index) => {
         return (
           <>
             {item0.isPlay === false ? (
@@ -158,10 +158,44 @@ function GameId() {
                       </div>
                     )
                   ) : item.status === 'result' ? (
-                    <>
-                      <h2>{item0.playerName}</h2>
-                      <p>{item0.point}</p>
-                    </>
+                    <div className="flex h-[100vh] w-full flex-col items-center justify-center">
+                      {/* <div className="flex justify-around w-[40%] items-end">
+                    <div className="w-48 h-72 bg-yellow-500 rounded-lg">
+                      <p className="text-center text-white font-semibold p-4 text-2xl">
+                      </p>
+                    </div>
+                    <div className="w-48 h-96 bg-blue-500 rounded-lg">
+                      <p className="text-center text-white font-semibold p-4 text-2xl">
+                      </p>
+                    </div>
+                    <div className="w-48 h-60 bg-rose-500 rounded-lg">
+                      <p className="text-center text-white font-semibold p-4 text-2xl">
+                      </p>
+                    </div>
+                  </div> */}
+                      <div className="mt-14 flex w-full justify-center">
+                        <table className="w-[50%] border">
+                          <tr className="cursor-pointer border-[1px] hover:bg-gray-100 active:bg-sky-200">
+                            <th>№</th>
+                            <th>Ismi</th>
+                            <th>Ball</th>
+                            <th>To`g`ri javoblar</th>
+                            <th>Noto`g`ri javoblar</th>
+                            <th>Savollar soni</th>
+                          </tr>
+                          <tr className="cursor-pointer border-[1px] hover:bg-gray-100 active:bg-sky-200">
+                            <td>{index + 1}</td>
+                            <td>{item0.playerName}</td>
+                            <td>{item0.point}</td>
+                            <td>{item0.intPoint}</td>
+                            <td>
+                              {item.questionList.length - item0.intPoint}
+                            </td>
+                            <td>{item.questionList.length}</td>
+                          </tr>
+                        </table>
+                      </div>
+                    </div>
                   ) : (
                     <WaitingRoom joinText="Xush kelibsiz o'yinga" />
                   )
