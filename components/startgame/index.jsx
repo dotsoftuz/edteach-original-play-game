@@ -20,14 +20,17 @@ function StartGame({ question, player }) {
       );
 
       let result = hello[i] === true ? 10 : 0;
+      let IntResult = hello[i] === true ? 1 : 0;
 
       const updatePlayer = async () => {
         const PlayerId = localStorage.getItem('pID');
         const questPlayer = doc(db, `question/${item.id}/players`, PlayerId);
         const Player = await getDoc(questPlayer);
         const point = Player.data().point;
+        const intPoint = Player.data().intPoint;
         await updateDoc(questPlayer, {
           point: point + result,
+          intPoint: intPoint + IntResult,
         });
       };
       updatePlayer();
@@ -42,11 +45,13 @@ function StartGame({ question, player }) {
             <div className="text-lg font-bold md:text-3xl">
               {game.questionIndex + 1}/{game.questionList.length}
             </div>
-            <div className='text-lg font-bold md:text-3xl'>{player.map((item) => item.playerName)}</div>
+            <div className="text-lg font-bold md:text-3xl">
+              {player.map((item) => item.playerName)}
+            </div>
           </nav>
 
           {correct === false ? (
-            <div className="p-2   grid grid-cols-2 grid-rows-2 gap-2">
+            <div className="grid   grid-cols-2 grid-rows-2 gap-2 p-2">
               {game.questionList[game.questionIndex].answerList.map(
                 (item, index) => (
                   <div
@@ -90,21 +95,21 @@ function StartGame({ question, player }) {
               )}
             </div>
           ) : (
-            <div className='flex md:items-center md:justify-center h-[90vh] p-2 md:-p-0'>
+            <div className="md:-p-0 flex h-[90vh] p-2 md:items-center md:justify-center">
               <div
                 className={
                   game.questionList[game.questionIndex].answerList[index]
                     .bgColor === 'red'
-                    ? ` create-blok h-[93vh] md:h-1/2 w-full md:w-[50vw] bg-[#e21b3c]`
+                    ? ` create-blok h-[93vh] w-full bg-[#e21b3c] md:h-1/2 md:w-[50vw]`
                     : game.questionList[game.questionIndex].answerList[index]
                         .bgColor === 'blue'
-                    ? `create-blok h-[93vh] md:h-1/2 w-full md:w-[50vw] bg-[#1368ce]`
+                    ? `create-blok h-[93vh] w-full bg-[#1368ce] md:h-1/2 md:w-[50vw]`
                     : game.questionList[game.questionIndex].answerList[index]
                         .bgColor === 'yellow'
-                    ? `create-blok h-[93vh] md:h-1/2 w-full md:w-[50vw] bg-[#d89e00]`
+                    ? `create-blok h-[93vh] w-full bg-[#d89e00] md:h-1/2 md:w-[50vw]`
                     : game.questionList[game.questionIndex].answerList[index]
                         .bgColor === 'gren'
-                    ? `create-blok h-[93vh] md:h-1/2 w-full md:w-[50vw] bg-[#26890c]`
+                    ? `create-blok h-[93vh] w-full bg-[#26890c] md:h-1/2 md:w-[50vw]`
                     : ''
                 }
               >

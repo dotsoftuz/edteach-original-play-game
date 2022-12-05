@@ -6,7 +6,7 @@ const Pin = ({ handleChange, subscribeUser }) => {
           className="w-56 rounded-lg bg-white py-2 px-2 outline-none placeholder:text-lg placeholder:font-medium placeholder:text-gray-700 md:w-96 md:py-4"
           type="text"
           onChange={handleChange}
-          placeholder="Pinni kiriting."
+          placeholder="Pin kiriting..."
         />
         <button
           onClick={subscribeUser}
