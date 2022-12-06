@@ -5,11 +5,14 @@ const Footer = () => {
   return (
     <footer className="bg-blue-50">
       <div className="container mx-auto flex flex-col items-center justify-between py-12 md:flex-row">
-        <p className="mb-8 text-sm md:text-base text-center text-gray-700 md:text-left md:mb-0">
+        <p className="mb-8 text-center text-sm text-gray-700 md:mb-0 md:text-left md:text-base">
           &copy;2022{' '}
           <a
             className="text-blue-600 hover:underline"
             href="https://dotsoft.uz"
+            target="_blank"
+            without
+            rel="noreferrer"
           >
             Dotsoft team.
           </a>
@@ -22,7 +25,7 @@ const Footer = () => {
               width="2500"
               height="2031"
               viewBox="-0.25 -0.25 1109.5 901.5"
-              className="w-5 h-5 md:w-6 md:h-6"
+              className="h-5 w-5 md:h-6 md:w-6"
               aria-hidden="true"
             >
               <path
@@ -46,7 +49,7 @@ const Footer = () => {
               width="2500"
               height="2500"
               viewBox="7.025 7.025 497.951 497.95"
-              className="w-5 h-5 md:w-6 md:h-6"
+              className="h-5 w-5 md:h-6 md:w-6"
               aria-hidden="true"
             >
               <linearGradient
@@ -74,7 +77,7 @@ const Footer = () => {
               viewBox="0 0 2500 2500"
               width="2500"
               height="2500"
-              className="w-5 h-5 md:w-6 md:h-6"
+              className="h-5 w-5 md:h-6 md:w-6"
               aria-hidden="true"
             >
               <defs>
@@ -116,7 +119,7 @@ const Footer = () => {
               width="1298"
               height="2500"
               viewBox="88.428 12.828 107.543 207.085"
-              className="w-5 h-5 md:w-6 md:h-6"
+              className="h-5 w-5 md:h-6 md:w-6"
               aria-hidden="true"
             >
               <path
