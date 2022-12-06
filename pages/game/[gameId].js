@@ -97,9 +97,13 @@ function GameId() {
     e.returnValue = '';
   };
 
+  question.map((item) => {
+    console.log(item.title);
+  });
+
   return (
     <div>
-      {player.map((item0, index) => {
+      {player.map((item0) => {
         return (
           <>
             {item0.isPlay === false ? (
@@ -165,14 +169,18 @@ function GameId() {
                     )
                   ) : item.status === 'result' ? (
                     <div className="flex h-screen flex-col justify-center">
-                      <div className="hidden lg:block">
+                      <h2 className="mx-auto h-10 w-20 bg-gray-300  text-center text-white">
+                        {item.title}
+                      </h2>
+
+                      {/* <div className="hidden lg:block">
                         <Confetti
                           width={width}
                           height={height}
                           tweenDuration={5000}
                         />
-                      </div>
-                      <div className="flex items-end justify-center space-x-2">
+                      </div> */}
+                      {/* <div className="flex items-end justify-center space-x-2">
                         <div className="relative flex h-24 w-20 items-center justify-center rounded-t-xl rounded-b-lg bg-[#F9C200] hover:bg-opacity-80 md:h-36 md:w-40 lg:h-40 lg:w-48">
                           <div className="absolute top-0 left-0 flex h-10 w-full items-center justify-center rounded-t-xl bg-[#F99500]">
                             <h3 className="font-semibold text-white md:text-lg">
@@ -206,12 +214,11 @@ function GameId() {
                             2
                           </h3>
                         </div>
-                      </div>
+                      </div> */}
                       <div>
                         <div className="mt-14 flex w-full justify-center">
                           <table className="w-[50%] border">
                             <tr className="cursor-pointer border-[1px] hover:bg-gray-100 active:bg-sky-200">
-                              <th>№</th>
                               <th>Ismi</th>
                               <th>Ball</th>
                               <th>To`g`ri javoblar</th>
@@ -219,7 +226,6 @@ function GameId() {
                               <th>Savollar soni</th>
                             </tr>
                             <tr className="cursor-pointer border-[1px] hover:bg-gray-100 active:bg-sky-200">
-                              <td>{index + 1}</td>
                               <td>{item0.playerName}</td>
                               <td>{item0.point}</td>
                               <td>{item0.intPoint}</td>
