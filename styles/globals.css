@@ -42,12 +42,12 @@
     @apply w-full;
   }
   th {
-    @apply p-2 text-left;
+    @apply p-2 text-left border;
   }
   tr {
     @apply cursor-pointer border-[1px] hover:bg-gray-100 active:bg-sky-200;
   }
   td {
-    @apply p-2;
+    @apply p-2 border;
   }
 }
