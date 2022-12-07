@@ -19,13 +19,6 @@ const Navbar = () => {
           >
             Kirish
           </a>
-          <a
-            className="dark:bg-[#1a5cff] hidden w-fit cursor-pointer rounded-lg border border-blue-500 bg-transparent py-2 px-4
-          text-sm font-medium text-blue-500 shadow-md duration-300 ease-in-out hover:shadow-md 
-          active:scale-95 active:bg-opacity-80 md:block md:text-sm"
-          >
-            Ro&apos;yxatdan o&apos;tish
-          </a>
         </div>
       </div>
     </nav>
