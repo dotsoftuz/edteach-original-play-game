@@ -4,13 +4,14 @@ import { getFirestore } from "firebase/firestore";
 import { getStorage } from "firebase/storage";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyAn7JjHWo4b1V8RJA7AkkojYcs5fdhkt6o",
-  authDomain: "quizapp-a52ab.firebaseapp.com",
-  databaseURL: "https://quizapp-a52ab-default-rtdb.firebaseio.com",
-  projectId: "quizapp-a52ab",
-  storageBucket: "quizapp-a52ab.appspot.com",
-  messagingSenderId: "272134491353",
-  appId: "1:272134491353:web:8f7c2af7fceeea523482c8",
+  apiKey: "AIzaSyCCqJ5W2wWdcM8-V-WQC531Ox7bPIqsmS4",
+  authDomain: "ecology-f343b.firebaseapp.com",
+  databaseURL: "https://ecology-f343b.firebaseio.com",
+  projectId: "ecology-f343b",
+  storageBucket: "ecology-f343b.appspot.com",
+  messagingSenderId: "106670445616",
+  appId: "1:106670445616:web:523371d06b7a4d83c409f5",
+  measurementId: "G-EDJ5NY9PGN"
 };
 
 export const app = initializeApp(firebaseConfig);
