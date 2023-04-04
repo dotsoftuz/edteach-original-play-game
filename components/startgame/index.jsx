@@ -37,6 +37,7 @@ function StartGame({ question, player }) {
     });
   };
 
+  console.log(question);
   return (
     <>
       {question.map((game) => (
@@ -51,48 +52,53 @@ function StartGame({ question, player }) {
           </nav>
 
           {correct === false ? (
-            <div className="grid   grid-cols-2 grid-rows-2 gap-2 p-2">
-              {game.questionList[game.questionIndex].answerList.map(
-                (item, index) => (
-                  <div
-                    key={item.id}
-                    onClick={() => getCorrectAnswer(game.questionIndex, index)}
-                    className={
-                      item.bgColor === 'red'
-                        ? ` create-blok bg-[#e21b3c]`
-                        : item.bgColor === 'blue'
-                        ? `create-blok bg-[#1368ce]`
-                        : item.bgColor === 'yellow'
-                        ? `create-blok bg-[#d89e00]`
-                        : item.bgColor === 'gren'
-                        ? `create-blok bg-[#26890c]`
-                        : ''
-                    }
-                  >
+            <div>
+              <h1 className='text-center text-[32px] font-semibold'>{game.questionList[game.questionIndex].question}?</h1>
+              <div className="grid   grid-cols-2 grid-rows-2 gap-2 p-2">
+                {game.questionList[game.questionIndex].answerList.map(
+                  (item, index) => (
                     <div
-                      className={`${
-                        item.svgIcon === 'diamond' ? 'rotate-45' : ''
-                      } !min-w-[30px] leading-[100%]`}
+                      key={item.id}
+                      onClick={() =>
+                        getCorrectAnswer(game.questionIndex, index)
+                      }
+                      className={
+                        item.bgColor === 'red'
+                          ? ` create-blok bg-[#e21b3c]`
+                          : item.bgColor === 'blue'
+                          ? `create-blok bg-[#1368ce]`
+                          : item.bgColor === 'yellow'
+                          ? `create-blok bg-[#d89e00]`
+                          : item.bgColor === 'gren'
+                          ? `create-blok bg-[#26890c]`
+                          : ''
+                      }
                     >
-                      <Image
-                        src={
-                          item.svgIcon === 'triangle'
-                            ? `${triangle.src}`
-                            : item.svgIcon === 'square'
-                            ? `${square.src}`
-                            : item.svgIcon === 'circle'
-                            ? `${circle.src}`
-                            : item.svgIcon === 'diamond'
-                            ? `${diamond.src}`
-                            : ''
-                        }
-                        width="60px"
-                        height="60px"
-                      />
+                      <div
+                        className={`${
+                          item.svgIcon === 'diamond' ? 'rotate-45' : ''
+                        } !min-w-[30px] leading-[100%]`}
+                      >
+                        <Image
+                          src={
+                            item.svgIcon === 'triangle'
+                              ? `${triangle.src}`
+                              : item.svgIcon === 'square'
+                              ? `${square.src}`
+                              : item.svgIcon === 'circle'
+                              ? `${circle.src}`
+                              : item.svgIcon === 'diamond'
+                              ? `${diamond.src}`
+                              : ''
+                          }
+                          width="60px"
+                          height="60px"
+                        />
+                      </div>
                     </div>
-                  </div>
-                )
-              )}
+                  )
+                )}
+              </div>
             </div>
           ) : (
             <div className="md:-p-0 flex h-[90vh] p-2 md:items-center md:justify-center">
