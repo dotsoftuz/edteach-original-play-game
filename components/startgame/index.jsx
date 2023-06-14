@@ -37,7 +37,6 @@ function StartGame({ question, player }) {
     });
   };
 
-  console.log(question);
   return (
     <>
       {question.map((game) => (
@@ -53,7 +52,9 @@ function StartGame({ question, player }) {
 
           {correct === false ? (
             <div>
-              <h1 className='text-center text-[32px] font-semibold'>{game.questionList[game.questionIndex].question}?</h1>
+              <h1 className="text-center text-[22px] font-semibold sm:text-[32px]">
+                {game.questionList[game.questionIndex].question}?
+              </h1>
               <div className="grid   grid-cols-2 grid-rows-2 gap-2 p-2">
                 {game.questionList[game.questionIndex].answerList.map(
                   (item, index) => (
@@ -64,7 +65,7 @@ function StartGame({ question, player }) {
                       }
                       className={
                         item.bgColor === 'red'
-                          ? ` create-blok bg-[#e21b3c]`
+                          ? `create-blok bg-[#e21b3c]`
                           : item.bgColor === 'blue'
                           ? `create-blok bg-[#1368ce]`
                           : item.bgColor === 'yellow'
@@ -79,7 +80,7 @@ function StartGame({ question, player }) {
                           item.svgIcon === 'diamond' ? 'rotate-45' : ''
                         } !min-w-[30px] leading-[100%]`}
                       >
-                        <Image
+                        <img
                           src={
                             item.svgIcon === 'triangle'
                               ? `${triangle.src}`
@@ -91,8 +92,7 @@ function StartGame({ question, player }) {
                               ? `${diamond.src}`
                               : ''
                           }
-                          width="60px"
-                          height="60px"
+                          className="h-[40px] w-[40px] md:h-[60px] md:w-[60px]"
                         />
                       </div>
                     </div>
@@ -106,16 +106,16 @@ function StartGame({ question, player }) {
                 className={
                   game.questionList[game.questionIndex].answerList[index]
                     .bgColor === 'red'
-                    ? ` create-blok h-[93vh] w-full bg-[#e21b3c] md:h-1/2 md:w-[50vw]`
+                    ? ` create-blok h-[20vh] w-full bg-[#e21b3c] md:h-[46vh]f md:w-[50vw]`
                     : game.questionList[game.questionIndex].answerList[index]
                         .bgColor === 'blue'
-                    ? `create-blok h-[93vh] w-full bg-[#1368ce] md:h-1/2 md:w-[50vw]`
+                    ? `create-blok h-[20vh] w-full bg-[#1368ce] md:h-[46vh]f md:w-[50vw]`
                     : game.questionList[game.questionIndex].answerList[index]
                         .bgColor === 'yellow'
-                    ? `create-blok h-[93vh] w-full bg-[#d89e00] md:h-1/2 md:w-[50vw]`
+                    ? `create-blok h-[20vh] w-full bg-[#d89e00] md:h-[46vh]f md:w-[50vw]`
                     : game.questionList[game.questionIndex].answerList[index]
                         .bgColor === 'gren'
-                    ? `create-blok h-[93vh] w-full bg-[#26890c] md:h-1/2 md:w-[50vw]`
+                    ? `create-blok h-[20vh] w-full bg-[#26890c] md:h-[46vh]f md:w-[50vw]`
                     : ''
                 }
               >

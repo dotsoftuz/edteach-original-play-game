@@ -1,5 +1,11 @@
 import { db } from '../../firebase';
-import { collection, onSnapshot, orderBy, query, where } from 'firebase/firestore';
+import {
+  collection,
+  onSnapshot,
+  orderBy,
+  query,
+  where,
+} from 'firebase/firestore';
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { AiOutlineCrown } from 'react-icons/ai';
@@ -44,9 +50,9 @@ function GameId() {
     );
 
     const order = collection(db, `question/${gameId}/players`);
-    const q2 = query(order, orderBy("point", "desc"));
+    const q2 = query(order, orderBy('point', 'desc'));
     onSnapshot(q2, (snapshot) =>
-    setOrdered(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })))
+      setOrdered(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })))
     );
   }, [gameId]);
 
@@ -104,8 +110,6 @@ function GameId() {
     e.returnValue = '';
   };
 
-
-
   return (
     <div>
       {player.map((item0) => {
@@ -143,7 +147,7 @@ function GameId() {
                               className={
                                 questionCount === 0
                                   ? 'hidden'
-                                  : 'visible flex items-center space-x-1 text-5xl font-semibold lg:text-7xl'
+                                  : 'visible flex items-center space-x-1 text-xl font-semibold lg:text-7xl'
                               }
                             >
                               {item.questionList[item.questionIndex].question}
